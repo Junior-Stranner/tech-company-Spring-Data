@@ -69,7 +69,6 @@ public class CargoDevService {
 
     private void cadastrarCargoDev(Scanner in) {
       CargoDev cargoDev = new CargoDev();
-      double salario = 0;
   
       System.out.println("Tecnologias disponíveis "
               + "\n 1 - Java "
@@ -110,21 +109,20 @@ public class CargoDevService {
       int opNivel = Integer.parseInt(in.nextLine());
       NivelVaga nivelVaga = NivelVaga.values()[opNivel - 1];
       System.out.println("Você escolheu : " + nivelVaga.getCargo());
-
-      salario = cargoDev.calculaSalario();
   
       try {
           // Configuração dos valores antes de chamar calculaSalario()
           cargoDev.setTecnologia(tecnologia);
           cargoDev.setSalarioPorHora(salarioPorHora);
           cargoDev.setHrsTrabalhadas(hrsTrabalhadas);
-          cargoDev.setSalario(salario);
           cargoDev.setNivelVaga(nivelVaga);
+          double salarioCalculado = cargoDev.calculaSalario();
+          cargoDev.setSalario(salarioCalculado);
   
           System.out.println("Debug - verificação se há valor ou é null\n {");
           System.out.println("Salario Por Hora " + salarioPorHora);
           System.out.println("horas Trabalhadas " + hrsTrabalhadas);
-          System.out.println("Salário Total " + salario);
+          System.out.println("Salário Total " + salarioCalculado);
           System.out.println("}");
 
           if (cargoDev.verificaSalario()) {
@@ -132,13 +130,13 @@ public class CargoDevService {
             System.out.println("Cargo salvo com sucesso!");
             this.cargoDevRepository.save(cargoDev);
         } else {
-            System.out.println("Salário de: " + salario + " é muito inferior ou superior ao cargo de: " + nivelVaga.getCargo()
+            System.out.println("Salário de: " + salarioCalculado + " é muito inferior ou superior ao cargo de: " + nivelVaga.getCargo()
                     + "\nDeseja escolher outro? (Digite 's' para sim)");
             String resposta = in.nextLine();
         
             if (!resposta.toLowerCase().contains("s")) {
                 System.out.println("Você continuará com o cargo: " + nivelVaga.getCargo()
-                        + "\nPorém o seu salário de: " + salario + " será abaixo ou acima ");
+                        + "\nPorém o seu salário de: " + salarioCalculado + " será abaixo ou acima ");
                 // Adicione lógica adicional aqui, se necessário.
                 this.cargoDevRepository.save(cargoDev);
 

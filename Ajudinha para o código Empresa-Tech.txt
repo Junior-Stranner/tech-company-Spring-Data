@@ -1,0 +1,46 @@
+Ajudinha para o código Empresa-Tech
+
+
+
+
+  System.out.println("\n===================="
+        +"\n Cargo Dev \n"
+        +"====================");
+         
+        System.out.println("digite o id do Cargo");
+        int idCargo = Integer.parseInt(in.nextLine());
+
+       Optional<CargoDev> cargDevOptional = this.cargoDevRepository.findById(idCargo);
+       if(cargDevOptional.isPresent()){
+
+        CargoDev cargoDev = cargDevOptional.get();
+
+        System.out.println(cargoDev);
+
+
+       }else{
+
+        System.out.println("Id : "+idCargo+" não encontrado");
+       }
+
+        System.out.println("\n===================="
+        +"\n Tipo Contrato \n"
+        +"====================");
+
+          System.out.println("Digite o tipo de Contrato (2 tipos)");
+        int idContrato = Integer.parseInt(in.nextLine());
+
+        Optional<TipoContrato> tipoContratoOptional = this.tipoContratoRepository.findById(idContrato);
+         if(tipoContratoOptional.isPresent()){
+
+        TipoContrato tipoContrato = tipoContratoOptional.get();
+
+        System.out.println(tipoContrato);
+
+        
+
+
+       }else{
+
+        System.out.println("Id : "+idContrato+" não encontrado");
+       }

@@ -1,22 +1,32 @@
 package com.jujubaprojects.empresatech.Service;
 
+import java.util.Optional;
 import java.util.Scanner;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jujubaprojects.empresatech.Repository.CargoDevRepository;
 import com.jujubaprojects.empresatech.Repository.DesenvolvedorRepository;
+import com.jujubaprojects.empresatech.Repository.TipoContratoRepository;
+import com.jujubaprojects.empresatech.model.CargoDev;
 import com.jujubaprojects.empresatech.model.Desenvolvedor;
+import com.jujubaprojects.empresatech.model.TipoContrato;
 
 
 @Service
 @Transactional
 public class DesenvolvedorService {
-    
+   
     private DesenvolvedorRepository desenvolvedorRepository;
+    private CargoDevRepository cargoDevRepository;
+    private TipoContratoRepository tipoContratoRepository;
 
-    public DesenvolvedorService(DesenvolvedorRepository desenvolvedorRepository){
+    public DesenvolvedorService(DesenvolvedorRepository desenvolvedorRepository,CargoDevRepository cargoDevRepository
+    ,TipoContratoRepository tipoContratoRepository){
       this.desenvolvedorRepository = desenvolvedorRepository;
+      this.cargoDevRepository = cargoDevRepository;
+      this.tipoContratoRepository = tipoContratoRepository;
     }
 
     public void menu(){
@@ -56,7 +66,7 @@ public class DesenvolvedorService {
 
     private void cadastroDev(Scanner in) {
         
-
+      try{
         System.out.println("===================="
         +"\n Desenvolvedor \n "
         +"====================");
@@ -70,16 +80,14 @@ public class DesenvolvedorService {
         System.out.println("Digite o cpf");
         String cpf = in.nextLine();
 
-        System.out.println("====================");
+        Desenvolvedor desenvolvedor = new Desenvolvedor(nome,idade,email,cpf);
+        this.desenvolvedorRepository.save(desenvolvedor);
 
-        Desenvolvedor desenvolvedor = new Desenvolvedor();
-        desenvolvedor.setNome(nome);
-        desenvolvedor.setIdade(idade);
-        desenvolvedor.setEmail(email);
-        desenvolvedor.setCpf(cpf);
+      
 
-       this.desenvolvedorRepository.save(desenvolvedor);
-
-    }
+  } catch(NumberFormatException e){
+    System.out.println("Erro: Entrada inválida. Certifique-se de que o número da mesa e o ID do cardápio sejam números válidos.");
+   }
+ }
 
 }

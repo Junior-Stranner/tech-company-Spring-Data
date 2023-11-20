@@ -45,16 +45,15 @@ public class Desenvolvedor {
 
    }
 
-    public Desenvolvedor(int id, String nome, int idade, String email, String cpf, CargoDev cargoDev,
-            List<TipoContrato> tipoContratos) {
-        this.id = id;
+   
+
+    public Desenvolvedor(String nome, int idade, String email, String cpf) {
         this.nome = nome;
         this.idade = idade;
         this.email = email;
         this.cpf = cpf;
-        this.cargoDev = cargoDev;
-        this.tipoContratos = tipoContratos;
     }
+
 
 
     public int getId() {

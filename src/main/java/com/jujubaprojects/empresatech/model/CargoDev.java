@@ -102,7 +102,7 @@ public class CargoDev {
     
     public double calculaSalario() {
 
-        return this.salarioPorHora * this.hrsTrabalhadas;
+        return  this.salarioPorHora * this.hrsTrabalhadas;
     }
 
     public boolean verificaSalario() {
@@ -111,9 +111,9 @@ public class CargoDev {
          nivelVaga = NivelVaga.DEV_PLENO;
          nivelVaga = NivelVaga.DEV_SENIOR;
          nivelVaga = NivelVaga.DEV_DIRETOR;
-         double salarioCalculado = calculaSalario();
+          calculaSalario();
         
-            if (salarioCalculado >= nivelVaga.getSalarioMinimo() && salarioCalculado <= nivelVaga.getSalarioMaximo()) {
+            if ( calculaSalario() >= nivelVaga.getSalarioMinimo() &&  calculaSalario() <= nivelVaga.getSalarioMaximo()) {
                 return true;
             }
         
@@ -138,9 +138,6 @@ public class CargoDev {
     public void setSalario(double salario) {
         this.salario = salario;
     }
-
-
-
 
 
     @Override
