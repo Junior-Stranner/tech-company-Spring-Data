@@ -8,8 +8,8 @@ public enum NivelVaga {
     DEV_DIRETOR("Diretor", 15000.0, 20000.0);
 
     private String cargo;
-    private double salarioMinimo;
-    private double salarioMaximo;
+    private final double salarioMinimo;
+    private final double salarioMaximo;
 
     NivelVaga(String cargo, double salarioMinimo, double salarioMaximo) {
         this.cargo = cargo;
@@ -29,18 +29,11 @@ public double getSalarioMinimo() {
      return salarioMinimo;
 }
 
-public void setSalarioMinimo(double salarioMinimo) {
-     this.salarioMinimo = salarioMinimo;
-}
 
 public double getSalarioMaximo() {
      return salarioMaximo;
 }
 
-public void setSalarioMaximo(double salarioMaximo) {
-     this.salarioMaximo = salarioMaximo;
-}
 
- 
 }
 

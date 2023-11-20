@@ -23,6 +23,7 @@ public class CargoDev {
     private double salarioPorHora;
     private double hrsTrabalhadas;
 
+    private double salario;
     private NivelVaga nivelVaga;
 
 
@@ -35,16 +36,19 @@ public class CargoDev {
     }
 
 
-    public CargoDev(int id,String tecnologia , double salarioPorHora, double hrsTrabalhadas , NivelVaga nivelVaga,
-            List<Desenvolvedor> desenvolvedores) {
+   
+
+
+    public CargoDev(int id, String tecnologia, double salarioPorHora, double hrsTrabalhadas, double salario,
+            NivelVaga nivelVaga, List<Desenvolvedor> desenvolvedores) {
         this.id = id;
         this.tecnologia = tecnologia;
         this.salarioPorHora = salarioPorHora;
         this.hrsTrabalhadas = hrsTrabalhadas;
+        this.salario = salario;
         this.nivelVaga = nivelVaga;
         this.desenvolvedores = desenvolvedores;
     }
-
 
     public int getId() {
         return id;
@@ -102,12 +106,20 @@ public class CargoDev {
     }
 
     public boolean verificaSalario() {
-
-        if(calculaSalario() > nivelVaga.getSalarioMaximo() && calculaSalario() < nivelVaga.getSalarioMinimo()){
-            return true;
+        NivelVaga nivelVaga = NivelVaga.DEV_ESTAGIO;
+         nivelVaga = NivelVaga.DEV_JUNIOR;
+         nivelVaga = NivelVaga.DEV_PLENO;
+         nivelVaga = NivelVaga.DEV_SENIOR;
+         nivelVaga = NivelVaga.DEV_DIRETOR;
+         double salarioCalculado = calculaSalario();
+        
+            if (salarioCalculado >= nivelVaga.getSalarioMinimo() && salarioCalculado <= nivelVaga.getSalarioMaximo()) {
+                return true;
+            }
+        
+            return false;
         }
-        return false;
-    }
+        
 
 
     public String getTecnologia() {
@@ -119,17 +131,24 @@ public class CargoDev {
         this.tecnologia = tecnologia;
     }
 
+    public double getSalario() {
+        return salario;
+    }
 
-    @Override
-    public String toString() {
-        return "CargoDev [id=" + id + ", tecnologia=" + tecnologia + ", salarioPorHora=" + salarioPorHora
-                + ", hrsTrabalhadas=" + hrsTrabalhadas + ", nivelVaga=" + nivelVaga
-                + ", desenvolvedores=" + desenvolvedores + "]";
+    public void setSalario(double salario) {
+        this.salario = salario;
     }
 
 
 
 
 
-    
+    @Override
+    public String toString() {
+        return "CargoDev [id=" + id + ", tecnologia=" + tecnologia + ", salarioPorHora=" + salarioPorHora
+                + ", hrsTrabalhadas=" + hrsTrabalhadas + ", salario=" + salario + ", nivelVaga=" + nivelVaga+ "]";
+    }
+
+
+   
 }
