@@ -27,17 +27,13 @@ public class CargoDev {
     private NivelVaga nivelVaga;
 
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "cargoDev")
     private List<Desenvolvedor> desenvolvedores;
 
 
     public CargoDev(){
 
     }
-
-
-   
-
 
     public CargoDev(int id, String tecnologia, double salarioPorHora, double hrsTrabalhadas, double salario,
             NivelVaga nivelVaga, List<Desenvolvedor> desenvolvedores) {

@@ -1,17 +1,13 @@
 package com.jujubaprojects.empresatech.Service;
 
-import java.util.Optional;
+import java.util.List;
 import java.util.Scanner;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.jujubaprojects.empresatech.Repository.CargoDevRepository;
 import com.jujubaprojects.empresatech.Repository.DesenvolvedorRepository;
-import com.jujubaprojects.empresatech.Repository.TipoContratoRepository;
-import com.jujubaprojects.empresatech.model.CargoDev;
 import com.jujubaprojects.empresatech.model.Desenvolvedor;
-import com.jujubaprojects.empresatech.model.TipoContrato;
 
 
 @Service
@@ -19,14 +15,13 @@ import com.jujubaprojects.empresatech.model.TipoContrato;
 public class DesenvolvedorService {
    
     private DesenvolvedorRepository desenvolvedorRepository;
-    private CargoDevRepository cargoDevRepository;
-    private TipoContratoRepository tipoContratoRepository;
+   /*  private CargoDevRepository cargoDevRepository;
+    private TipoContratoRepository tipoContratoRepository;*/
 
-    public DesenvolvedorService(DesenvolvedorRepository desenvolvedorRepository,CargoDevRepository cargoDevRepository
-    ,TipoContratoRepository tipoContratoRepository){
+    public DesenvolvedorService(DesenvolvedorRepository desenvolvedorRepository){
       this.desenvolvedorRepository = desenvolvedorRepository;
-      this.cargoDevRepository = cargoDevRepository;
-      this.tipoContratoRepository = tipoContratoRepository;
+   /* this.cargoDevRepository = cargoDevRepository;
+      this.tipoContratoRepository = tipoContratoRepository;*/
     }
 
     public void menu(){
@@ -51,8 +46,10 @@ public class DesenvolvedorService {
       switch(op){
 
         case 1: cadastroDev(in);break;
+        case 2: visualizarDevs(in);break;
 
-        default: isTrue = false ; break;
+        default: 
+            isTrue = false ; break;
 
       }
 
@@ -61,6 +58,15 @@ public class DesenvolvedorService {
       } catch (RuntimeException e) {
         // TODO: handle exception
         e.printStackTrace();
+      }
+    }
+
+    private void visualizarDevs(Scanner in) {
+
+      List<Desenvolvedor> desenvolvedores = this.desenvolvedorRepository.findAll();
+
+      for (Desenvolvedor desenvolvedor : desenvolvedores) {
+        System.out.println(desenvolvedores);
       }
     }
 
@@ -81,9 +87,13 @@ public class DesenvolvedorService {
         String cpf = in.nextLine();
 
         Desenvolvedor desenvolvedor = new Desenvolvedor(nome,idade,email,cpf);
+        System.out.println("Dev Salvo com sucesso ");
+        System.out.println("Before saving to the database");
         this.desenvolvedorRepository.save(desenvolvedor);
-
-      
+        this.desenvolvedorRepository.flush();
+        System.out.println("After saving to the database");
+        
+    
 
   } catch(NumberFormatException e){
     System.out.println("Erro: Entrada inválida. Certifique-se de que o número da mesa e o ID do cardápio sejam números válidos.");

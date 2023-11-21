@@ -46,7 +46,8 @@ public void run(String... args) {
                     + "\n======================= "
 					+ "\n 0 - Voltar"
                     + "\n 1 - TipoContratos"
-					+ "\n 2 - CargoDev");
+					+ "\n 2 - CargoDev"
+                    + "\n 3 - Desenvolvedor");
             
             int op = Integer.parseInt(in.nextLine());
 
@@ -57,6 +58,8 @@ public void run(String... args) {
                 case 2:
                     this.cargoDevService.menu();
                     break;
+                case 3:
+                    this.desenvolvedorService.menu();
                 default:
                     isTrue = false ;break;
             }

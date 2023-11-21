@@ -1,10 +1,6 @@
 package com.jujubaprojects.empresatech.model;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
-import com.jujubaprojects.empresatech.enums.NivelVaga;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -12,7 +8,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -38,14 +33,10 @@ public class Desenvolvedor {
  //   private Set<TipoContrato> tipoContratos = new HashSet<>();
     private List<TipoContrato> tipoContratos;
 
-
-
-
     public Desenvolvedor(){
 
    }
 
-   
 
     public Desenvolvedor(String nome, int idade, String email, String cpf) {
         this.nome = nome;
@@ -53,7 +44,6 @@ public class Desenvolvedor {
         this.email = email;
         this.cpf = cpf;
     }
-
 
 
     public int getId() {
@@ -117,7 +107,6 @@ public class Desenvolvedor {
 
     @Override
     public String toString() {
-        return "Desenvolvedor [id=" + id + ", nome=" + nome + ", idade=" + idade + ", email=" + email + ", cpf=" + cpf
-                + ", cargoDev=" + cargoDev + ", tipoContratos=" + tipoContratos + "]";
+        return "Desenvolvedor [id=" + id + ", nome=" + nome + ", idade=" + idade + ", email=" + email + ", cpf=" + cpf + "]";
     }
 }
