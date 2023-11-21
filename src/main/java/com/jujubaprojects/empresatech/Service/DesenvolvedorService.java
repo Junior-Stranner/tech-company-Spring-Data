@@ -1,6 +1,7 @@
 package com.jujubaprojects.empresatech.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 import org.springframework.stereotype.Service;
@@ -29,8 +30,6 @@ public class DesenvolvedorService {
 
         boolean isTrue = true;
 
-      try {
-
         do{
             System.out.println("MENU"
             +"\n =======================\n" 
@@ -47,6 +46,7 @@ public class DesenvolvedorService {
 
         case 1: cadastroDev(in);break;
         case 2: visualizarDevs(in);break;
+        case 3: visualizarDevId(in);break;
 
         default: 
             isTrue = false ; break;
@@ -54,11 +54,21 @@ public class DesenvolvedorService {
       }
 
         }while(isTrue);
-        
-      } catch (RuntimeException e) {
-        // TODO: handle exception
-        e.printStackTrace();
-      }
+    }
+
+    private void visualizarDevId(Scanner in) {
+
+      System.out.println("Digite o id do dev");
+      int DevId = Integer.parseInt(in.nextLine());
+
+     Optional<Desenvolvedor> devOptional = this.desenvolvedorRepository.findById(DevId);
+
+     if(devOptional.isPresent()){
+      Desenvolvedor desenvolvedor = devOptional.get();
+
+      System.out.println(desenvolvedor);
+     }
+
     }
 
     private void visualizarDevs(Scanner in) {
@@ -70,9 +80,10 @@ public class DesenvolvedorService {
       }
     }
 
+    @Transactional
     private void cadastroDev(Scanner in) {
         
-      try{
+     
         System.out.println("===================="
         +"\n Desenvolvedor \n "
         +"====================");
@@ -87,17 +98,16 @@ public class DesenvolvedorService {
         String cpf = in.nextLine();
 
         Desenvolvedor desenvolvedor = new Desenvolvedor(nome,idade,email,cpf);
+     /*   desenvolvedor.setNome(nome);
+        desenvolvedor.setIdade(idade);
+        desenvolvedor.setEmail(email);
+        desenvolvedor.setCpf(cpf);*/
+
         System.out.println("Dev Salvo com sucesso ");
         System.out.println("Before saving to the database");
         this.desenvolvedorRepository.save(desenvolvedor);
-        this.desenvolvedorRepository.flush();
         System.out.println("After saving to the database");
         
-    
-
-  } catch(NumberFormatException e){
-    System.out.println("Erro: Entrada inválida. Certifique-se de que o número da mesa e o ID do cardápio sejam números válidos.");
-   }
  }
 
 }

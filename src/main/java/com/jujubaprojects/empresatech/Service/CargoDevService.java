@@ -45,18 +45,6 @@ public class CargoDevService {
         }while(isTrue);
         
     }
-
-    private void calculaSalario(Scanner in) {
-        
-    }
-
-    private void teste(Scanner in) {
-     /*  NivelVaga nivelVaga = new NivelVaga();
-
-      System.out.println("Salário Mínimo: " + .getSalarioMinimo());
-      System.out.println("Salário Máximo: " + nivel.getSalarioMaximo());*/
-    }
-
     private void visualizarCargos(Scanner in) {
 
       List<CargoDev> cargoDevs = this.cargoDevRepository.findAll();

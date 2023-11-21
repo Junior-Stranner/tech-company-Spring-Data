@@ -9,7 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -27,8 +27,6 @@ public class CargoDev {
     private NivelVaga nivelVaga;
 
 
-    @OneToMany(mappedBy = "cargoDev")
-    private List<Desenvolvedor> desenvolvedores;
 
 
     public CargoDev(){
@@ -36,14 +34,13 @@ public class CargoDev {
     }
 
     public CargoDev(int id, String tecnologia, double salarioPorHora, double hrsTrabalhadas, double salario,
-            NivelVaga nivelVaga, List<Desenvolvedor> desenvolvedores) {
+            NivelVaga nivelVaga) {
         this.id = id;
         this.tecnologia = tecnologia;
         this.salarioPorHora = salarioPorHora;
         this.hrsTrabalhadas = hrsTrabalhadas;
         this.salario = salario;
         this.nivelVaga = nivelVaga;
-        this.desenvolvedores = desenvolvedores;
     }
 
     public int getId() {
@@ -86,15 +83,7 @@ public class CargoDev {
     }
 
 
-    public List<Desenvolvedor> getDesenvolvedores() {
-        return desenvolvedores;
-    }
-
-
-    public void setDesenvolvedores(List<Desenvolvedor> desenvolvedores) {
-        this.desenvolvedores = desenvolvedores;
-    }
-
+   
     
     public double calculaSalario() {
 

@@ -23,23 +23,15 @@ public class TipoContrato {
     private String contrato;
 
 
-     @ManyToMany
-    @JoinTable(
-      name = "desenvolvedor_tipo_contrato", 
-      joinColumns = @JoinColumn(name = "tipo_contrato_id"), 
-      inverseJoinColumns = @JoinColumn(name = "desenvolvedor_id"))
-    private List<Desenvolvedor> desenvolvedores;
-
-
     public TipoContrato() {
     
     }
 
 
-    public TipoContrato(int id, String contrato, List<Desenvolvedor> desenvolvedores) {
+    public TipoContrato(int id, String contrato) {
         this.id = id;
         this.contrato = contrato;
-        this.desenvolvedores = desenvolvedores;
+  
     }
 
 

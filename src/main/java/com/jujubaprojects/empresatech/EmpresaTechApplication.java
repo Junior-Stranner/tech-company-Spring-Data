@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.jujubaprojects.empresatech.Service.CargoDevService;
 import com.jujubaprojects.empresatech.Service.DesenvolvedorService;
+import com.jujubaprojects.empresatech.Service.EmpresaTechService;
 import com.jujubaprojects.empresatech.Service.TipoContratoService;
 
 @SpringBootApplication
@@ -17,18 +18,17 @@ public class EmpresaTechApplication implements CommandLineRunner{
 	private DesenvolvedorService desenvolvedorService;
 	private TipoContratoService tipoContratoService;
 	private CargoDevService cargoDevService;
+    private EmpresaTechService empresaTechService;
 
-	public EmpresaTechApplication( DesenvolvedorService desenvolvedorService,
-	 TipoContratoService tipoContratoService, CargoDevService cargoDevService){
+	public EmpresaTechApplication(DesenvolvedorService desenvolvedorService, TipoContratoService tipoContratoService,
+            CargoDevService cargoDevService, EmpresaTechService empresaTechService) {
+        this.desenvolvedorService = desenvolvedorService;
+        this.tipoContratoService = tipoContratoService;
+        this.cargoDevService = cargoDevService;
+        this.empresaTechService = empresaTechService;
+    }
 
-		this.desenvolvedorService = desenvolvedorService;
-		this.tipoContratoService = tipoContratoService;
-		this.cargoDevService = cargoDevService;
-	}
-
-	
-
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 		SpringApplication.run(EmpresaTechApplication.class, args);
 	}
 
@@ -47,7 +47,8 @@ public void run(String... args) {
 					+ "\n 0 - Voltar"
                     + "\n 1 - TipoContratos"
 					+ "\n 2 - CargoDev"
-                    + "\n 3 - Desenvolvedor");
+                    + "\n 3 - Desenvolvedor"
+                    + "\n 4 - Empresa-Tech");
             
             int op = Integer.parseInt(in.nextLine());
 
@@ -60,6 +61,9 @@ public void run(String... args) {
                     break;
                 case 3:
                     this.desenvolvedorService.menu();
+                case 4:
+                    this.empresaTechService.menu();
+                    break;    
                 default:
                     isTrue = false ;break;
             }

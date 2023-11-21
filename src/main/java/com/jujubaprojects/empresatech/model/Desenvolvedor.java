@@ -1,15 +1,10 @@
 package com.jujubaprojects.empresatech.model;
 
-import java.util.List;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -25,13 +20,15 @@ public class Desenvolvedor {
     private String cpf; 
 
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "cargoDev_id")
-    private CargoDev cargoDev;
+ /*    @ManyToMany
+        @JoinTable(name = "desenvolvedor_cargoDev",
+        joinColumns = @JoinColumn(name = "desenvolvedor_id"),
+        inverseJoinColumns = @JoinColumn(name = "cargoDev_id"))
+    private List<CargoDev>cargoDevs;
 
     @ManyToMany(mappedBy = "desenvolvedores")
  //   private Set<TipoContrato> tipoContratos = new HashSet<>();
-    private List<TipoContrato> tipoContratos;
+    private List<TipoContrato> tipoContratos;*/
 
     public Desenvolvedor(){
 
@@ -86,27 +83,9 @@ public class Desenvolvedor {
         this.cpf = cpf;
     }
 
-    public CargoDev getCargoDev() {
-        return cargoDev;
-    }
-
-    public void setCargoDev(CargoDev cargoDev) {
-        this.cargoDev = cargoDev;
-    }
-
-
-    public List<TipoContrato> getTipoContratos() {
-        return tipoContratos;
-    }
-
-
-    public void setTipoContratos(List<TipoContrato> tipoContratos) {
-        this.tipoContratos = tipoContratos;
-    }
-
-
     @Override
     public String toString() {
         return "Desenvolvedor [id=" + id + ", nome=" + nome + ", idade=" + idade + ", email=" + email + ", cpf=" + cpf + "]";
     }
+
 }
